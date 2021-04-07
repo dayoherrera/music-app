@@ -99,7 +99,7 @@
     }
 
     &[filter-color="gray"]{
-        @include linear-gradient(rgba($black-color,.20), rgba(211, 190, 131, 0.89));
+        @include linear-gradient(rgba($black-color,.60), rgba(0, 0, 0, 0.925));
     }
 
     .container{

@@ -25,6 +25,12 @@ export class AppService{
     return this.httpClient.get(`http://jsonplaceholder.typicode.com/comments`,  httpOptions);
   }
 
+  getUsers():any {
+    const httpOptions = {
+    }; 
+    return this.httpClient.get(`http://jsonplaceholder.typicode.com/users`,  httpOptions);
+  }
+
   /*downloadexcelremediation(idform):any {
     
     const httpOptions = {

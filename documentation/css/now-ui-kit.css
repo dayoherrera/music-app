@@ -5580,6 +5580,19 @@ body {
     background: #888888;
 }
 
+.navbar.bg-gray:not(.navbar-transparent) a:not(.dropdown-item):not(.btn) {
+    color: #686868;
+}
+
+.navbar.bg-grey:not(.navbar-transparent) a:not(.dropdown-item):not(.btn).disabled {
+    opacity: .5;
+    color: #686868;
+}
+
+.navbar.bg-gray:not(.navbar-transparent) .button-bar {
+    background: #888888;
+}
+
 .navbar.bg-white:not(.navbar-transparent) .nav-item.active .nav-link:not(.btn),
 .navbar.bg-white:not(.navbar-transparent) .nav-item .nav-link:not(.btn):focus,
 .navbar.bg-white:not(.navbar-transparent) .nav-item .nav-link:not(.btn):hover,
@@ -5588,6 +5601,17 @@ body {
 }
 
 .navbar.bg-white:not(.navbar-transparent) .logo-container {
+    border: 1px solid #888888;
+}
+
+.navbar.bg-gray:not(.navbar-transparent) .nav-item.active .nav-link:not(.btn),
+.navbar.bg-gray:not(.navbar-transparent) .nav-item .nav-link:not(.btn):focus,
+.navbar.bg-gray:not(.navbar-transparent) .nav-item .nav-link:not(.btn):hover,
+.navbar.bg-gray:not(.navbar-transparent) .nav-item .nav-link:not(.btn):active {
+    background-color: rgba(124, 124, 124, 0.637);
+}
+
+.navbar.bg-gray:not(.navbar-transparent) .logo-container {
     border: 1px solid #888888;
 }
 
@@ -5617,6 +5641,10 @@ body {
 
 .bg-white {
     background-color: #FFFFFF !important;
+}
+
+.bg-gray {
+    background-color: #bebebe !important;
 }
 
 .dropdown-menu {
@@ -10990,6 +11018,9 @@ Created using IcoMoon - icomoon.io
     }
     .navbar.bg-white:not(.navbar-transparent) .navbar-toggler-bar {
         background: #888888;
+    }
+    .navbar.bg-gray:not(.navbar-transparent) .navbar-toggler-bar {
+        background: #525252;
     }
     .navbar .toggled .navbar-toggler-bar {
         width: 24px;

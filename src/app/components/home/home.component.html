@@ -3,26 +3,47 @@
     <div class="page-header clear-filter" filter-color="gray">
 
         <div class="page-header-image rellax-header" data-rellax-speed="-5" style="background-image: url('assets/img/header2.jpg');">
-
         </div>
 
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-8 margin-carousel">
-                    <div class="title">
-                        <h4>Top 10</h4>
-                    </div>
-                  <ngb-carousel>
-                      <ng-template *ngFor="let photo of photoData" ngbSlide>
-                          <a href="#topOneH" target="_self">
-                        <img class="d-block" [src]="photo.url" alt="{{photo.title}}"></a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{photo.title}}</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-8 margin-carousel">
+                            <div class="title">
+                                <h4>Top 10 songs</h4>
+                            </div>
+                          <ngb-carousel>
+                              <ng-template *ngFor="let photo of photoData" ngbSlide>
+                                  <a href="#topOneH" target="_self">
+                                <img class="d-block" [src]="photo.url" alt="{{photo.title}}"></a>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{photo.title}}</h5>
+                                </div>
+                              </ng-template>
+                          </ngb-carousel>
                         </div>
-                      </ng-template>
-                  </ngb-carousel>
+                    </div> 
                 </div>
-            </div>       
+
+                <div class="col-md-6">
+                        <div class="team">
+                            <div class="title margin-title">
+                                <h4>Trending artists </h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 margin-top" *ngFor="let user of usersData; let i = index">
+                                    <div *ngIf="i < 4">
+                                        <img [src]="photoData[i].thumbnailUrl" alt="{{photoData[i].title}}" class="rounded-circle img-fluid img-raised">
+                                        <h4 class="title">{{user.username}}</h4>
+                                        <p class="category">{{user.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                </div>
+
+            </div>    
         </div>
     </div>
 
@@ -56,7 +77,7 @@
                                     <i class="now-ui-icons ui-2_like"></i> Comments
                                   </ng-template>
                                     <ng-template ngbTabContent>
-                                        <p class="comments"> {{CommentsData[i].body}}. </p>
+                                        <p class="comments"> {{commentsData[i].body}}. </p>
                                     </ng-template>
                                 </ngb-tab>
                                 <ngb-tab>
@@ -85,13 +106,56 @@
                                 <img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised">
                                 <h4 class="title">Album Detail</h4>
                                 <p class="category text-primary">{{photo.title}}</p>
-                                <p class="description comments">{{CommentsData[i].body}}.
+                                <p class="description comments">{{commentsData[i].body}}.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>-->
+    </section>
+
+    <section>
+        
+        <div class="section section-tabs table-section">
+
+            <div class="container">
+                
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Album</th>
+                        <th scope="col">Record label</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of users; let i = index">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>
+                        {{ user.name }}
+                        </td>
+                        <td>{{ photoData[i].title}}</td>
+                        <td>{{ user.company.name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshArtist()">
+                </ngb-pagination>
+
+                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshArtist()">
+                    <option [ngValue]="2">2 items per page</option>
+                    <option [ngValue]="4">4 items per page</option>
+                    <option [ngValue]="6">6 items per page</option>
+                </select>
+                </div>
+
+            </div>
+        </div>
+
     </section>
       
 </div>

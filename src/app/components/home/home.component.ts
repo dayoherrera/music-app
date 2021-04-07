@@ -13,7 +13,14 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   public albumData = [];
   public photoData = [];
-  public CommentsData = [];
+  public commentsData = [];
+  public usersData = [];
+  public displayedColumns;
+
+  public page = 1;
+  public pageSize = 10;
+  public collectionSize = 0;
+  public users = [];
 
   constructor( private element : ElementRef, 
     @Inject(AppService) appService: AppService,
@@ -25,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       appService.getAlbum().subscribe((res) => {
 
         this.albumData.push(res);
-        console.log('this.albumData: ', this.albumData);
+        // console.log('this.albumData: ', this.albumData);
   
       }
       , (error) => {
@@ -36,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 
         this.photoData = res.slice(5, 15);
 
-        console.log('this.photoData: ', this.photoData);
+        // console.log('this.photoData: ', this.photoData);
   
       }
       , (error) => {
@@ -45,22 +52,35 @@ export class HomeComponent implements OnInit, OnDestroy{
 
       appService.getComments().subscribe((res) => {
 
-        this.CommentsData = res.slice(5, 15);
+        this.commentsData = res.slice(5, 15);
 
-        console.log('this.CommentsData: ', this.CommentsData);
+        // console.log('this.CommentsData: ', this.commentsData);
   
       }
       , (error) => {
         console.log(error);
       });
 
+      appService.getUsers().subscribe((res) => {
+
+        this.usersData = res.slice(0, 15);
+
+        this.collectionSize = this.usersData.length;
+        this.users = this.usersData;
+
+        console.log('this.usersData: ', this.usersData);
+  
+      }
+      , (error) => {
+        console.log(error);
+      });
+
+      this.refreshArtist();
+
     }
 
       data : Date = new Date();
-  
-      page = 4;
-      page1 = 5;
-      page2 = 3;
+      
       focus;
       focus1;
       focus2;
@@ -97,14 +117,10 @@ export class HomeComponent implements OnInit, OnDestroy{
           var body = document.getElementsByTagName('body')[0];
           body.classList.remove('index-page');
       }
-/**ngOnInit() {
-  
-          let navbar = document.getElementsByTagName('app-navbar')[0].children[0];
-          navbar.classList.add('navbar-transparent');
+
+      refreshArtist(): void {
+        this.users = this.usersData.map((user, i) => ({id: i + 1, ...user}))
+          .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
       }
-      ngOnDestroy(){
-        let navbar = document.getElementsByTagName('app-navbar')[0].children[0];
-      }
- */
 
 }
