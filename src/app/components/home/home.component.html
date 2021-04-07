@@ -1,0 +1,98 @@
+<div class="wrapper">
+
+    <div class="page-header clear-filter" filter-color="gray">
+
+        <div class="page-header-image rellax-header" data-rellax-speed="-5" style="background-image: url('assets/img/header2.jpg');">
+
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8 margin-carousel">
+                    <div class="title">
+                        <h4>Top 10</h4>
+                    </div>
+                  <ngb-carousel>
+                      <ng-template *ngFor="let photo of photoData" ngbSlide>
+                          <a href="#topOneH" target="_self">
+                        <img class="d-block" [src]="photo.url" alt="{{photo.title}}"></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{photo.title}}</h5>
+                        </div>
+                      </ng-template>
+                  </ngb-carousel>
+                </div>
+            </div>       
+        </div>
+    </div>
+
+    <section id="topOneH">
+        
+        <div class="section section-tabs color-section">
+            <div class="container">
+                <p class="category">Top 10</p>
+                <div class="row">
+                    <div class="col-md-5" *ngFor="let photo of photoData; let i = index">
+                        <div class="nav-tabs-wrapper size-cars">
+                            <ngb-tabset [justify]="'center'" class="text-center">
+                                <ngb-tab>
+                                  <ng-template ngbTabTitle>
+                                    <i class="now-ui-icons emoticons_satisfied"></i> # {{i+1}}
+                                  </ng-template>
+                                    <ng-template ngbTabContent>
+                                      <img class="d-block" [src]="photo.thumbnailUrl">
+                                    </ng-template>
+                                </ngb-tab>
+                                <ngb-tab>
+                                  <ng-template ngbTabTitle>
+                                    <i class="now-ui-icons media-2_note-03"></i> Album Name
+                                  </ng-template>
+                                    <ng-template ngbTabContent>
+                                        <p class="comments"> {{photo.title}}. </p>
+                                    </ng-template>
+                                </ngb-tab>
+                                <ngb-tab>
+                                  <ng-template ngbTabTitle>
+                                    <i class="now-ui-icons ui-2_like"></i> Comments
+                                  </ng-template>
+                                    <ng-template ngbTabContent>
+                                        <p class="comments"> {{CommentsData[i].body}}. </p>
+                                    </ng-template>
+                                </ngb-tab>
+                                <ngb-tab>
+                                    <ng-template ngbTabTitle>
+                                      <i class="now-ui-icons media-2_note-03"></i> Preview
+                                    </ng-template>
+                                      <ng-template ngbTabContent>
+                                        <ngbd-modal-component [image]="photo.thumbnailUrl"></ngbd-modal-component>
+                                      </ng-template>
+                                  </ngb-tab>
+                            </ngb-tabset>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--
+        <div class="section section-team text-center">
+            <div class="container">
+                <h2 class="title">Top 100</h2>
+                <div class="team">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="team-player" *ngFor="let photo of photoData; let i = index">
+                                <img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised">
+                                <h4 class="title">Album Detail</h4>
+                                <p class="category text-primary">{{photo.title}}</p>
+                                <p class="description comments">{{CommentsData[i].body}}.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </section>
+      
+</div>
+

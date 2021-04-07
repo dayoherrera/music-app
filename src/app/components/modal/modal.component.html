@@ -1,0 +1,14 @@
+<button class="btn btn-warning" (click)="open(modal_mini, 'modal_mini', 'sm')">
+   Play
+</button>
+<ng-template #modal_mini class="color-modal" let-c="close" let-d="dismiss">
+  <div class="modal-header justify-content-center">
+    <img class="d-block" [src]="image">
+  </div>
+  <div class="modal-body">
+      <p>30 second preview</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-warning" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

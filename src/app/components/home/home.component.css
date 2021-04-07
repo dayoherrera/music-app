@@ -1,0 +1,29 @@
+.content-home {
+    background-color: blue;
+}
+
+.margin-carousel {
+    margin-top: 60px;
+}
+
+img {
+    width: 731px;
+}
+
+.color-section {
+    background-color: white;
+}
+
+.comments {
+    text-align: justify;
+    margin: 20px;
+}
+
+.size-cars {
+    display: flex;
+    width: 446px;
+}
+
+.aling-cards {
+    flex-shrink: 0;
+}
