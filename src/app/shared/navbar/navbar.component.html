@@ -4,6 +4,18 @@
             <a class="navbar-brand" [routerLink]="['/index']" routerLinkActive="active">
                Home
             </a>
+
+            <a class="navbar-brand" [routerLink]="['/play']" routerLinkActive="active">
+              Play
+            </a>
+
+            <a class="navbar-brand" routerLink="./play" fragment="topOneH" routerLinkActive="active">
+              Top 10 songs
+            </a>
+
+           <a class="navbar-brand" routerLink="./play" fragment="topArt" routerLinkActive="active">
+             Trending artists
+           </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
                    <span class="navbar-toggler-bar bar1"></span>
                 <span class="navbar-toggler-bar bar2"></span>
