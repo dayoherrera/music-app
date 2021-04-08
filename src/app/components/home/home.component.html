@@ -11,11 +11,11 @@
                     <div class="row justify-content-center">
                         <div class="col-8 margin-carousel">
                             <div class="title">
-                                <h4>Top 10 songs</h4>
+                                <h4><a routerLink="./" fragment="topOneH">Top 10 songs</a></h4>
                             </div>
                           <ngb-carousel>
                               <ng-template *ngFor="let photo of photoData" ngbSlide>
-                                  <a href="#topOneH" target="_self">
+                                  <a routerLink="./" fragment="topOneH">
                                 <img class="d-block" [src]="photo.url" alt="{{photo.title}}"></a>
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>{{photo.title}}</h5>
@@ -29,12 +29,12 @@
                 <div class="col-md-6">
                         <div class="team">
                             <div class="title margin-title">
-                                <h4>Trending artists </h4>
+                                <h4><a routerLink="./" fragment="topArt">Trending artists</a> </h4>
                             </div>
                             <div class="row">
                                 <div class="col-md-5 margin-top" *ngFor="let photo of photoArtistsData; let i = index">
                                    
-                                        <img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised">
+                                    <a routerLink="./" fragment="topArt"><img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised"></a>
                                         <div *ngIf="usersData.length > 0">
                                         
                                         <h4 class="title">{{usersData[i].username}}</h4>
@@ -54,8 +54,8 @@
     <section id="topOneH">
         
         <div class="section section-tabs color-section">
-            <div class="container">
-                <p class="category">Top 10</p>
+            <div class="container top-s">
+                <p class="category title-category">Top 10</p>
                 <div class="row">
                     <div class="col-md-5" *ngFor="let photo of photoData; let i = index">
                         <div class="nav-tabs-wrapper size-cars">
@@ -119,32 +119,47 @@
         </div>-->
     </section>
 
-    <section class="table-section">
+    <section class="table-section" id="topArt">
         
         <div class="section section-tabs">
 
             <div class="container">
+
+                <div class="form-group form-inline">
+                    <span class="badge badge-warning">Search Artist by name:</span>
+                        <input class="form-control ml-2 view-input" type="text" name="searchTerm" [(ngModel)]="searchTerm" (input)="search($event.target.value)" />
+                </div>
+
+                <div *ngIf="viewPlay" class="progress-container">
+                    <span class="progress-badge"> <strong> # {{numSong}} | {{nameArtist}} - {{nameSong}}</strong></span>
+                
+                    <ngb-progressbar *ngIf="musicPlay < 10" [value]="musicPlay"><span class="progress-value">00:0{{musicPlay}}</span></ngb-progressbar>
+              
+                    <ngb-progressbar *ngIf="musicPlay >= 10" [value]="musicPlay"><span class="progress-value">0{{contMinute}}:{{musicPlay}}</span></ngb-progressbar>
+                    
+                    <br>
+                  </div>
                 
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Artist</th>
+                        <th scope="col">Song name</th>
                         <th scope="col">Website</th>
-                        <th scope="col">Record label</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let user of users; let i = index">
+                    <tr *ngFor="let user of users; let i = index; listFilter of searchTerm">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>
                         {{ user.name }}
                         </td>
-                        <td>{{ user.website }}</td>
                         <td>{{ user.company.name }}</td>
+                        <td>{{ user.website }}</td>
                         <td>
-                            <button class="btn btn-primary btn-round" type="button" (click)="playMusic(6)">Play <i class="now-ui-icons tech_headphones"></i></button>
+                            <button class="btn btn-warning btn-round" type="button" (click)="playMusic(user.name, i, user.company.name)">Play <i class="now-ui-icons tech_headphones"></i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -164,6 +179,30 @@
         </div>
 
     </section>
+
+    <footer class="footer" data-background-color="black">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://www.instagram.com/dayoherrera">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/dayoherrera/music-app">
+                          Repository
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                &copy;
+              {{data | date: 'yyyy'}}, Coded by
+                <a href="https://github.com/dayoherrera" target="_blank">Dayo</a>.
+            </div>
+        </div>
+    </footer>
       
 </div>
 

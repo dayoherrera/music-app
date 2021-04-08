@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 import { ComponentsComponent } from './components/components.component';
 import { LandingComponent } from './examples/landing/landing.component';
@@ -20,11 +20,13 @@ const routes: Routes =[
     { path: 'play',     component: HomeComponent }
 ];
 
+const routerOptions: ExtraOptions = { useHash: false, anchorScrolling: 'enabled'};
+
 @NgModule({
     imports: [
         CommonModule,
         BrowserModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes, routerOptions)
     ],
     exports: [
     ],

@@ -17,6 +17,14 @@ export class HomeComponent implements OnInit, OnDestroy{
   public commentsData = [];
   public usersData = [];
   public displayedColumns;
+  public viewPlay: boolean;
+  public musicPlay: number;
+  public intervalId: any;
+  public nameArtist: string;
+  public numSong: number;
+  public nameSong: string;
+  public contMinute: number;
+  public searchTerm: string;
 
   public page = 2;
   public pageSize = 0;
@@ -108,6 +116,11 @@ export class HomeComponent implements OnInit, OnDestroy{
       }
   
       ngOnInit() {
+
+        this.viewPlay = false;
+        this.musicPlay = 0;
+        this.contMinute = 1;
+
         var rellaxHeader = new Rellax('.rellax-header');
   
           var navbar = document.getElementsByTagName('nav')[0];
@@ -127,9 +140,44 @@ export class HomeComponent implements OnInit, OnDestroy{
           .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
       }
 
-      playMusic(id): void{
+      playMusic(nameArtist, numSong, nameSong): void{
 
-        console.log('hello', id);
+        clearInterval(this.intervalId);
+        this.musicPlay = 0;
+
+        this.nameArtist = nameArtist;
+        this.numSong = numSong+1;
+        this.nameSong = nameSong;
+
+        this.viewPlay = true;
+
+        this.intervalId = setInterval(()=>{  
+
+          this.musicPlay++;
+          
+          if(this.musicPlay === 59){
+
+              console.log('intervalId: ', this.intervalId);
+
+              clearInterval(this.intervalId);
+              this.musicPlay = 0;
+          }
+
+          
+        }, 1000);
+      
+      }
+
+      search(value: string): void {
+
+        console.log('value: ', value);
+
+        this.users = this.usersData.filter((val) => val.name.toLowerCase().includes(value.toLowerCase()));
+        this.collectionSize = this.users.length;
+
+        if (!value){
+          this.refreshArtist();
+        }
       }
 
 }

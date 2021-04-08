@@ -65,7 +65,7 @@ export class NgbdModalBasic {
             }
 
             
-        }, 1000);
+        }, 850);
     }
 
     closeModal(): void{

@@ -20,7 +20,7 @@ img {
 }
 
 .table-section {
-    background-image: url("../../../assets/img/header4.jpg");
+    background-color: rgba(94, 94, 94, 0.829);
 }
 
 .comments {
@@ -35,4 +35,22 @@ img {
 
 .aling-cards {
     flex-shrink: 0;
+}
+
+.view-input {
+    background-color: white;
+    width: 350px;
+}
+
+a {
+    color: white;
+    text-decoration:none;
+}
+
+.top-s {
+    margin-right: 280px;
+}
+
+.title-category {
+    font-size: 300%;
 }
