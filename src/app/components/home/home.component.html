@@ -32,12 +32,16 @@
                                 <h4>Trending artists </h4>
                             </div>
                             <div class="row">
-                                <div class="col-md-5 margin-top" *ngFor="let user of usersData; let i = index">
-                                    <div *ngIf="i < 4">
-                                        <img [src]="photoData[i].thumbnailUrl" alt="{{photoData[i].title}}" class="rounded-circle img-fluid img-raised">
-                                        <h4 class="title">{{user.username}}</h4>
-                                        <p class="category">{{user.name}}</p>
-                                    </div>
+                                <div class="col-md-5 margin-top" *ngFor="let photo of photoArtistsData; let i = index">
+                                   
+                                        <img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised">
+                                        <div *ngIf="usersData.length > 0">
+                                        
+                                        <h4 class="title">{{usersData[i].username}}</h4>
+                                        <p class="category">{{usersData[i].name}}</p>
+
+                                        </div>
+                                    
                                 </div>
                             </div>
                         </div>        
@@ -115,9 +119,9 @@
         </div>-->
     </section>
 
-    <section>
+    <section class="table-section">
         
-        <div class="section section-tabs table-section">
+        <div class="section section-tabs">
 
             <div class="container">
                 
@@ -126,8 +130,9 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Artist</th>
-                        <th scope="col">Album</th>
+                        <th scope="col">Website</th>
                         <th scope="col">Record label</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -136,8 +141,11 @@
                         <td>
                         {{ user.name }}
                         </td>
-                        <td>{{ photoData[i].title}}</td>
+                        <td>{{ user.website }}</td>
                         <td>{{ user.company.name }}</td>
+                        <td>
+                            <button class="btn btn-primary btn-round" type="button" (click)="playMusic(6)">Play <i class="now-ui-icons tech_headphones"></i></button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -147,9 +155,8 @@
                 </ngb-pagination>
 
                 <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshArtist()">
-                    <option [ngValue]="2">2 items per page</option>
-                    <option [ngValue]="4">4 items per page</option>
-                    <option [ngValue]="6">6 items per page</option>
+                    <option [ngValue]="5">5 items per page</option>
+                    <option [ngValue]="10">10 items per page</option>
                 </select>
                 </div>
 

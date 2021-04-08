@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngbd-modal-component',
@@ -9,9 +9,15 @@ export class NgbdModalBasic {
     closeResult: string;
     @Input() image: any;
 
-    constructor(private modalService: NgbModal) {}
+    public musicPlay = 0;
+    public intervalId: any;
+
+    constructor(private modalService: NgbModal) {    }
 
     open(content, type, modalDimension) {
+
+        this.playSong();
+
         if (modalDimension === 'sm' && type === 'modal_mini') {
             this.modalService.open(content, { windowClass: 'modal-mini modal-sound', size: 'sm' }).result.then((result) => {
                 this.closeResult = `Closed with: ${result}`;
@@ -42,5 +48,30 @@ export class NgbdModalBasic {
         } else {
             return  `with: ${reason}`;
         }
+    }
+
+    playSong(): void{
+            
+        this.intervalId = setInterval(()=>{  
+
+            this.musicPlay++;
+            
+            if(this.musicPlay === 30){
+
+                console.log('intervalId: ', this.intervalId);
+
+                clearInterval(this.intervalId);
+                this.musicPlay = 0;
+            }
+
+            
+        }, 1000);
+    }
+
+    closeModal(): void{
+        
+        clearInterval(this.intervalId);
+                this.musicPlay = 0;
+        this.modalService.dismissAll();
     }
 }

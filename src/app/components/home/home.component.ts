@@ -13,12 +13,13 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   public albumData = [];
   public photoData = [];
+  public photoArtistsData = [];
   public commentsData = [];
   public usersData = [];
   public displayedColumns;
 
-  public page = 1;
-  public pageSize = 10;
+  public page = 2;
+  public pageSize = 0;
   public collectionSize = 0;
   public users = [];
 
@@ -42,8 +43,9 @@ export class HomeComponent implements OnInit, OnDestroy{
       appService.getPhotos().subscribe((res) => {
 
         this.photoData = res.slice(5, 15);
+        this.photoArtistsData = res.slice(0, 4);
 
-        // console.log('this.photoData: ', this.photoData);
+        // console.log('this.photoArtistsData: ', this.photoArtistsData);
   
       }
       , (error) => {
@@ -62,20 +64,22 @@ export class HomeComponent implements OnInit, OnDestroy{
       });
 
       appService.getUsers().subscribe((res) => {
-
-        this.usersData = res.slice(0, 15);
-
-        this.collectionSize = this.usersData.length;
+        
+        this.usersData = res;
+        ;
         this.users = this.usersData;
 
-        console.log('this.usersData: ', this.usersData);
+        this.pageSize = 5;
+        this.collectionSize = 10;
+
+        this.refreshArtist();
+
+        // console.log('this.usersData: ', this.usersData);
   
       }
       , (error) => {
         console.log(error);
       });
-
-      this.refreshArtist();
 
     }
 
@@ -121,6 +125,11 @@ export class HomeComponent implements OnInit, OnDestroy{
       refreshArtist(): void {
         this.users = this.usersData.map((user, i) => ({id: i + 1, ...user}))
           .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      }
+
+      playMusic(id): void{
+
+        console.log('hello', id);
       }
 
 }
