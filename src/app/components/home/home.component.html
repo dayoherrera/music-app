@@ -7,7 +7,8 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6">
+
                     <div class="row justify-content-center">
                         <div class="col-8 margin-carousel">
                             <div class="title">
@@ -26,13 +27,13 @@
                     </div> 
                 </div>
 
-                <div class="col-md-6">
+                <div class="col col-lg-5 col-md-6 col-sm-6">
                         <div class="team">
                             <div class="title margin-title">
                                 <h4><a routerLink="./" fragment="topArt">Trending artists</a> </h4>
                             </div>
                             <div class="row">
-                                <div class="col-md-5 margin-top" *ngFor="let photo of photoArtistsData; let i = index">
+                                <div class="col col-md-4 col-sm-2 margin-top" *ngFor="let photo of photoArtistsData; let i = index">
                                    
                                     <a routerLink="./" fragment="topArt"><img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised"></a>
                                         <div *ngIf="usersData.length > 0">
@@ -51,13 +52,13 @@
         </div>
     </div>
 
-    <section id="topOneH">
+    <section class="top-one" id="topOneH">
         
         <div class="section section-tabs color-section">
             <div class="container top-s">
                 <p class="category title-category">Top 10</p>
                 <div class="row">
-                    <div class="col-md-5" *ngFor="let photo of photoData; let i = index">
+                    <div class="col-md-6" *ngFor="let photo of photoData; let i = index">
                         <div class="nav-tabs-wrapper size-cars">
                             <ngb-tabset [justify]="'center'" class="text-center">
                                 <ngb-tab>
@@ -99,24 +100,7 @@
                 </div>
             </div>
         </div>
-    <!--
-        <div class="section section-team text-center">
-            <div class="container">
-                <h2 class="title">Top 100</h2>
-                <div class="team">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="team-player" *ngFor="let photo of photoData; let i = index">
-                                <img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised">
-                                <h4 class="title">Album Detail</h4>
-                                <p class="category text-primary">{{photo.title}}</p>
-                                <p class="description comments">{{commentsData[i].body}}.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
+        
     </section>
 
     <section class="table-section" id="topArt">
@@ -166,7 +150,7 @@
                 </table>
 
                 <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshArtist()">
+                <ngb-pagination [collectionSize]="collectionSize" class="pagination-warning" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshArtist()">
                 </ngb-pagination>
 
                 <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshArtist()">
