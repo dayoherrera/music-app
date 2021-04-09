@@ -1,7 +1,3 @@
-ngb-progressbar {
-    margin-top: 5rem;
-}
-
 .title-header {
     color: black;
 }
@@ -14,4 +10,17 @@ ngb-progressbar {
 .button-header:hover {
     color: white;
     background-color: black;
+}
+
+@media screen and (min-height: 1100px){
+    .footer .container-main{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+    }
+
+    .container-content {
+        height: 350px;
+    }
 }
