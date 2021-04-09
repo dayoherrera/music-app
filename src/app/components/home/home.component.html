@@ -2,7 +2,7 @@
 
     <div class="page-header clear-filter" filter-color="gray">
 
-        <div class="page-header-image rellax-header" data-rellax-speed="-5" style="background-image: url('assets/img/header2.jpg');">
+        <div class="page-header-image rellax-header" data-rellax-speed="-5" style="background-image: url('assets/img/header6.jpg');">
         </div>
 
         <div class="container">
@@ -56,14 +56,14 @@
         
         <div class="section section-tabs color-section">
             <div class="container top-s">
-                <p class="category title-category">Top 10</p>
+                <p class="category title-category color-text">Top 10</p>
                 <div class="row">
                     <div class="col-md-6" *ngFor="let photo of photoData; let i = index">
                         <div class="nav-tabs-wrapper size-cars">
                             <ngb-tabset [justify]="'center'" class="text-center">
                                 <ngb-tab>
                                   <ng-template ngbTabTitle>
-                                    <i class="now-ui-icons emoticons_satisfied"></i> # {{i+1}}
+                                    <i class="now-ui-icons emoticons_satisfied color-text"></i> <span class="color-text"># {{i+1}}</span>  
                                   </ng-template>
                                     <ng-template ngbTabContent>
                                       <img class="d-block" [src]="photo.thumbnailUrl">
@@ -71,23 +71,23 @@
                                 </ngb-tab>
                                 <ngb-tab>
                                   <ng-template ngbTabTitle>
-                                    <i class="now-ui-icons media-2_note-03"></i> Album Name
+                                    <i class="now-ui-icons media-2_note-03 color-text"></i> <span class="color-text">Album Name</span> 
                                   </ng-template>
                                     <ng-template ngbTabContent>
-                                        <p class="comments"> {{photo.title}}. </p>
+                                        <p class="comments"> <span class="color-text">{{photo.title}}</span></p>
                                     </ng-template>
                                 </ngb-tab>
                                 <ngb-tab>
                                   <ng-template ngbTabTitle>
-                                    <i class="now-ui-icons ui-2_like"></i> Comments
+                                    <i class="now-ui-icons ui-2_like color-text"></i> <span class="color-text">Comments</span>
                                   </ng-template>
                                     <ng-template ngbTabContent>
-                                        <p class="comments"> {{commentsData[i].body}}. </p>
+                                        <p class="comments"> <span class="color-text">{{commentsData[i].body}}</span> </p>
                                     </ng-template>
                                 </ngb-tab>
                                 <ngb-tab>
                                     <ng-template ngbTabTitle>
-                                      <i class="now-ui-icons media-2_note-03"></i> Preview
+                                      <i class="now-ui-icons media-2_note-03 color-text"></i> <span class="color-text">Preview</span>
                                     </ng-template>
                                       <ng-template ngbTabContent>
                                         <ngbd-modal-component [image]="photo.thumbnailUrl"></ngbd-modal-component>
@@ -103,11 +103,11 @@
         
     </section>
 
-    <section class="table-section" id="topArt">
+    <section id="topArt">
         
-        <div class="section section-tabs">
+        <div class="section section-tabs table-section">
 
-            <div class="container">
+            <div class="container container-color">
 
                 <div class="form-group form-inline">
                     <span class="badge badge-warning">Search Artist by name:</span>

@@ -10,25 +10,25 @@ export class AppService{
   getAlbum():any {
     const httpOptions = {
     }; 
-    return this.httpClient.get(`http://jsonplaceholder.typicode.com/albums`,  httpOptions);
+    return this.httpClient.get(`https://jsonplaceholder.typicode.com/albums`,  httpOptions);
   }
 
   getPhotos():any {
     const httpOptions = {
     }; 
-    return this.httpClient.get(`http://jsonplaceholder.typicode.com/photos`,  httpOptions);
+    return this.httpClient.get(`https://jsonplaceholder.typicode.com/photos`,  httpOptions);
   }
 
   getComments():any {
     const httpOptions = {
     }; 
-    return this.httpClient.get(`http://jsonplaceholder.typicode.com/comments`,  httpOptions);
+    return this.httpClient.get(`https://jsonplaceholder.typicode.com/comments`,  httpOptions);
   }
 
   getUsers():any {
     const httpOptions = {
     }; 
-    return this.httpClient.get(`http://jsonplaceholder.typicode.com/users`,  httpOptions);
+    return this.httpClient.get(`https://jsonplaceholder.typicode.com/users`,  httpOptions);
   }
 
   /*downloadexcelremediation(idform):any {

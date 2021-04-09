@@ -11,6 +11,10 @@
     margin-top: 175px;
 }
 
+.color-text {
+    color: black;
+}
+
 img {
     width: 731px;
 }
@@ -20,7 +24,15 @@ img {
 }
 
 .table-section {
-    background-color: rgba(94, 94, 94, 0.829);
+    background-image: url('assets/img/header4.jpg');
+    background-repeat: no-repeat;
+    background-size: 1900px 900px;
+    /*background-color: rgba(94, 94, 94, 0.829);*/
+}
+
+.container-color {
+    background-color: rgba(255, 255, 255, 0.904);
+    border-radius: 40px;
 }
 
 .comments {
@@ -59,4 +71,8 @@ a {
     .top-one {
         margin-top: 400px;
     }
+}
+
+input {
+    margin: 15px;
 }
