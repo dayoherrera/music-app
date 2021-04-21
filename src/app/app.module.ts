@@ -12,6 +12,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeModule } from '../app/components/home/home.module';
 import {AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,13 @@ import { HttpClientModule } from '@angular/common/http';
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
-        ExamplesModule
+        ExamplesModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [AppService],
     bootstrap: [AppComponent]
