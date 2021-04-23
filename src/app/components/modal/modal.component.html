@@ -9,9 +9,7 @@
     <div class="progress-container progress-primary">
       <span class="progress-badge">Song...</span>
   
-      <ngb-progressbar *ngIf="musicPlay < 10" [value]="musicPlay"><span class="progress-value">00:0{{musicPlay}}</span></ngb-progressbar>
-
-      <ngb-progressbar *ngIf="musicPlay >= 10" [value]="musicPlay"><span class="progress-value">00:{{musicPlay}}</span></ngb-progressbar>
+      <ngb-progressbar [value]="musicPlay"><span class="progress-value">00:0{{musicPlay}}</span></ngb-progressbar>
       
       <br>
     </div>

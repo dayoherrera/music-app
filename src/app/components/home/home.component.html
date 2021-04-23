@@ -19,7 +19,7 @@
                                   <a routerLink="./" fragment="topOneH">
                                 <img class="d-block" [src]="photo.url" alt="{{photo.title}}"></a>
                                 <div class="carousel-caption d-none d-md-block">
-                                    <h5>{{photo.title}}</h5>
+                                    <h5 class="title-photo">{{photo.title}}</h5>
                                 </div>
                               </ng-template>
                           </ngb-carousel>
@@ -35,13 +35,10 @@
                             <div class="row">
                                 <div class="col col-md-4 col-sm-2 margin-top" *ngFor="let photo of photoArtistsData; let i = index">
                                    
-                                    <a routerLink="./" fragment="topArt"><img [src]="photo.thumbnailUrl" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised"></a>
-                                        <div *ngIf="usersData.length > 0">
+                                    <a routerLink="./" fragment="topArt"><img [src]="photo.url" alt="{{photo.title}}" class="rounded-circle img-fluid img-raised"></a>
                                         
-                                        <h4 class="title">{{usersData[i].username}}</h4>
-                                        <p class="category">{{usersData[i].name}}</p>
-
-                                        </div>
+                                        <h4 class="title">{{photo.first_name}}</h4>
+                                        <p class="category">{{photo.last_name}}</p>
                                     
                                 </div>
                             </div>
@@ -66,7 +63,7 @@
                                     <i class="now-ui-icons emoticons_satisfied color-text"></i> <span class="color-text"># {{i+1}}</span>  
                                   </ng-template>
                                     <ng-template ngbTabContent>
-                                      <img class="d-block" [src]="photo.thumbnailUrl">
+                                      <img class="d-block" [src]="photo.url">
                                     </ng-template>
                                 </ngb-tab>
                                 <ngb-tab>
@@ -90,7 +87,7 @@
                                       <i class="now-ui-icons media-2_note-03 color-text"></i> <span class="color-text">Preview</span>
                                     </ng-template>
                                       <ng-template ngbTabContent>
-                                        <ngbd-modal-component [image]="photo.thumbnailUrl"></ngbd-modal-component>
+                                        <ngbd-modal-component [image]="photo.url" [numSong]="i"></ngbd-modal-component>
                                       </ng-template>
                                   </ngb-tab>
                             </ngb-tabset>
@@ -135,15 +132,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let user of users; let i = index; listFilter of searchTerm">
+                    <tr *ngFor="let user of users; let i = index; let listFilter of searchTerm">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>
                         {{ user.name }}
                         </td>
-                        <td>{{ user.company.name }}</td>
+                        <td>{{ user.company }}</td>
                         <td>{{ user.website }}</td>
                         <td>
-                            <button class="btn btn-warning btn-round" type="button" (click)="playMusic(user.name, i, user.company.name)">Play <i class="now-ui-icons tech_headphones"></i></button>
+                            <button class="btn btn-warning btn-round" type="button" (click)="playMusic(user.name, i, user.company)">Play <i class="now-ui-icons tech_headphones"></i></button>
                         </td>
                     </tr>
                     </tbody>

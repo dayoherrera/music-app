@@ -76,3 +76,7 @@ a {
 input {
     margin: 15px;
 }
+
+.title-photo {
+    background-color: rgba(0, 0, 0, 0.349);
+}

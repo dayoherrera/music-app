@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, Inject, OnDestroy, Renderer2 } from '@angular/core';
 import { AppService } from '../../app.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-import * as Rellax from 'rellax';
+import { Howl } from 'howler';
+import * as faker from 'faker'
 
 @Component({
   selector: 'app-home',
@@ -10,137 +10,80 @@ import * as Rellax from 'rellax';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy{
-
-  public albumData = [];
+  
   public photoData = [];
   public photoArtistsData = [];
+  public users = [];
   public commentsData = [];
   public usersData = [];
-  public displayedColumns;
   public viewPlay: boolean;
   public musicPlay: number;
   public intervalId: any;
   public nameArtist: string;
   public numSong: number;
   public nameSong: string;
-  public contMinute: number;
   public searchTerm: string;
-
-  public page = 2;
+  public page = 1;
   public pageSize = 0;
   public collectionSize = 0;
-  public users = [];
 
-  constructor( private element : ElementRef, 
-    @Inject(AppService) appService: AppService,
-    private renderer : Renderer2, config: NgbAccordionConfig) {
-
-      config.closeOthers = true;
-      config.type = 'info';
-
-      appService.getAlbum().subscribe((res) => {
-
-        this.albumData.push(res);
-        // console.log('this.albumData: ', this.albumData);
-  
+  public soundsV = [
+    new Howl({
+      src: ['https://www.kozco.com/tech/piano2-CoolEdit.mp3'],
+      autoplay: false,
+      loop: true,
+      volume: 0.5,
+      onend: function() {
+        // Finished!
       }
-      , (error) => {
-        console.log(error);
-      });
+      }),
+      new Howl({
+        src: ['https://freesound.org/data/previews/381/381353_1676145-hq.mp3'],
+        autoplay: false,
+        loop: true,
+        volume: 0.5,
+        onend: function() {
+          // Finished!
+        }
+      })
+   ];
 
-      appService.getPhotos().subscribe((res) => {
 
-        this.photoData = res.slice(5, 15);
-        this.photoArtistsData = res.slice(0, 4);
+  public sound;
 
-        // console.log('this.photoArtistsData: ', this.photoArtistsData);
-  
-      }
-      , (error) => {
-        console.log(error);
-      });
-
-      appService.getComments().subscribe((res) => {
-
-        this.commentsData = res.slice(5, 15);
-
-        // console.log('this.CommentsData: ', this.commentsData);
-  
-      }
-      , (error) => {
-        console.log(error);
-      });
-
-      appService.getUsers().subscribe((res) => {
-        
-        this.usersData = res;
-        ;
-        this.users = this.usersData;
-
-        this.pageSize = 5;
-        this.collectionSize = 10;
-
-        this.refreshArtist();
-
-        // console.log('this.usersData: ', this.usersData);
-  
-      }
-      , (error) => {
-        console.log(error);
-      });
-
-    }
-
-      data : Date = new Date();
-      
-      focus;
-      focus1;
-      focus2;
-  
-      date: {year: number, month: number};
-      model: NgbDateStruct;
-  
-      public isCollapsed = true;
-      public isCollapsed1 = true;
-      public isCollapsed2 = true;
-  
-      state_icon_primary = true;
-      
-      isWeekend(date: NgbDateStruct) {
-          const d = new Date(date.year, date.month - 1, date.day);
-          return d.getDay() === 0 || d.getDay() === 6;
-      }
-  
-      isDisabled(date: NgbDateStruct, current: {month: number}) {
-          return date.month !== current.month;
-      }
+  constructor() { 
+    this.getImagesArtists();
+    this.getAlbum();
+    this.getUsersList();
+  }
   
       ngOnInit() {
 
         this.viewPlay = false;
         this.musicPlay = 0;
-        this.contMinute = 1;
-
-        var rellaxHeader = new Rellax('.rellax-header');
-  
-          var navbar = document.getElementsByTagName('nav')[0];
-          navbar.classList.add('navbar-transparent');
-          var body = document.getElementsByTagName('body')[0];
-          body.classList.add('index-page');
       }
+
       ngOnDestroy(){
-          var navbar = document.getElementsByTagName('nav')[0];
-          navbar.classList.remove('navbar-transparent');
-          var body = document.getElementsByTagName('body')[0];
-          body.classList.remove('index-page');
       }
 
       refreshArtist(): void {
+
         this.users = this.usersData.map((user, i) => ({id: i + 1, ...user}))
           .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
       }
 
       playMusic(nameArtist, numSong, nameSong): void{
+
+        this.soundsV.forEach((sound)=>sound.stop());
+
+        if(numSong % 2 === 0){
+          
+          this.soundsV[0].play();
+
+        }else{
+          
+          this.soundsV[1].play();
+        }
 
         clearInterval(this.intervalId);
         this.musicPlay = 0;
@@ -157,8 +100,6 @@ export class HomeComponent implements OnInit, OnDestroy{
           
           if(this.musicPlay === 59){
 
-              console.log('intervalId: ', this.intervalId);
-
               clearInterval(this.intervalId);
               this.musicPlay = 0;
           }
@@ -170,14 +111,86 @@ export class HomeComponent implements OnInit, OnDestroy{
 
       search(value: string): void {
 
-        console.log('value: ', value);
-
         this.users = this.usersData.filter((val) => val.name.toLowerCase().includes(value.toLowerCase()));
         this.collectionSize = this.users.length;
 
         if (!value){
           this.refreshArtist();
         }
+      }
+
+      getImagesArtists(): void{
+
+        this.photoArtistsData = []
+
+        for (let image = 1; image <= 4; image++) {
+
+          let people = faker.image.people();
+          let imageUrl = faker.image.avatar(); 
+          let title = faker.datatype.string();
+          let lastName = faker.name.lastName();
+          let firstName = faker.name.firstName();
+
+          this.photoArtistsData.push({
+              'id': image,
+              'url': imageUrl,
+              'people': people,
+              'title': title,
+              'first_name': firstName,
+              'last_name': lastName,
+          });
+        }
+
+      }
+
+      getAlbum(): void{
+
+        this.photoData = [];
+
+        for (let i = 1; i <= 10; i++) {
+          
+          let people = `${faker.random.image()}?random=${Date.now()}`; 
+          let title = faker.name.title();
+
+          this.photoData.push({
+              'id': i,
+              'url': people,
+              'title': title
+          });
+
+          let body = faker.commerce.productDescription();
+
+          this.commentsData.push({
+              'id': i,
+              'body': body
+          });
+        }
+      }
+
+      getUsersList(): void{
+
+        this.usersData = [];
+
+        for (let i = 1; i <= 10; i++) {
+          
+          let firstName = faker.name.firstName();
+          let company = faker.name.jobDescriptor();
+          let website = faker.internet.domainName();
+
+          this.usersData.push({
+              'id': i,
+              'name': firstName,
+              'company': company,
+              'website': website
+          });
+        }
+
+        this.users = this.usersData;
+
+        this.pageSize = 5;
+        this.collectionSize = 10;
+
+        this.refreshArtist();
       }
 
 }
