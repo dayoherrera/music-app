@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, Inject, OnDestroy, Renderer2 } from '@angular/core';
-import { AppService } from '../../app.service';
-import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Howl } from 'howler';
-import * as faker from 'faker'
+import { AppService } from '../../app.service';
+import * as faker from 'faker';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy{
   public page = 1;
   public pageSize = 0;
   public collectionSize = 0;
+
+  storageRef: any;
 
   public soundsV = [
     new Howl({
@@ -51,10 +53,11 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   public sound;
 
-  constructor() { 
+  constructor(private appService: AppService) { 
     this.getImagesArtists();
     this.getAlbum();
-    this.getUsersList();
+    this.getUsersList();   
+    this.listSongs(); 
   }
   
       ngOnInit() {
@@ -110,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       }
 
       search(value: string): void {
-
+        
         this.users = this.usersData.filter((val) => val.name.toLowerCase().includes(value.toLowerCase()));
         this.collectionSize = this.users.length;
 
@@ -189,8 +192,11 @@ export class HomeComponent implements OnInit, OnDestroy{
 
         this.pageSize = 5;
         this.collectionSize = 10;
-
+    
         this.refreshArtist();
+      }
+
+      listSongs(): void{
       }
 
 }
