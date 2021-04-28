@@ -13,6 +13,10 @@ import { HomeModule } from '../app/components/home/home.module';
 import {AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 @NgModule({
     declarations: [

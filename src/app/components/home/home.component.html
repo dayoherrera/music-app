@@ -5,7 +5,9 @@
         <div class="page-header-image rellax-header" data-rellax-speed="-5" style="background-image: url('assets/img/header6.jpg');">
         </div>
 
-        <div class="container">
+        <div (scroll)="doSomethingOnWindowScroll($event)">
+
+        <div @animationC1 class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6">
 
@@ -48,10 +50,11 @@
             </div>    
         </div>
     </div>
+    </div>
 
     <section class="top-one" id="topOneH">
         
-        <div class="section section-tabs color-section">
+        <div id="containertwo" class="section section-tabs color-section">
             <div class="container top-s">
                 <p class="category title-category color-text">Top 10</p>
                 <div class="row">
@@ -121,7 +124,7 @@
                     <br>
                   </div>
                 
-                <table class="table table-striped">
+                <table id="containerthree" class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -132,16 +135,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let user of users; let i = index; listFilter of searchTerm">
-                        <th scope="row">{{ i + 1 }}</th>
-                        <td>
-                        {{ user.name }}
-                        </td>
-                        <td>{{ user.company }}</td>
-                        <td>{{ user.website }}</td>
-                        <td>
-                            <button class="btn btn-warning btn-round" type="button" (click)="playMusic(user.name, i, user.company)">Play <i class="now-ui-icons tech_headphones"></i></button>
-                        </td>
+                    <tr *ngFor="let user of users; let i = index; listFilter of searchTerm" >
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>
+                            {{ user.name }}
+                            </td>
+                            <td>{{ user.company }}</td>
+                            <td>{{ user.website }}</td>
+                            <td>
+                                <button class="btn btn-warning btn-round" type="button" (click)="playMusic(user.name, i, user.company)">Play <i class="now-ui-icons tech_headphones"></i></button>
+                            </td>
                     </tr>
                     </tbody>
                 </table>

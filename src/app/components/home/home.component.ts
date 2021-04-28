@@ -1,13 +1,27 @@
-import { Component, OnInit, ElementRef, Inject, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Howl } from 'howler';
 import { AppService } from '../../app.service';
 import * as faker from 'faker';
-import { map } from 'rxjs/internal/operators/map';
+import { trigger, state, style, animate, transition} from '@angular/animations'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('animationC1', [
+      state('void', style({
+        transform: 'translateX(-100%)',
+        opacity: 0
+      })),
+      transition(':enter', [
+        animate(300,style({
+          transform: 'translateX(0)',
+          opacity: 1
+        }))
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit, OnDestroy{
   
@@ -197,6 +211,40 @@ export class HomeComponent implements OnInit, OnDestroy{
       }
 
       listSongs(): void{
+
+        /*console.log('holaaa');
+
+        this.appService.getSongs(2).snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          )
+        ).subscribe(fileUploads => {
+          console.log('fileUploads: ', fileUploads);
+        });*/
+      }
+
+      @HostListener("window:scroll", ['$event'])
+      doSomethingOnScroll($event: Event): void{
+        let animationT1 = document.getElementById('containertwo');
+        let animationT2 = document.getElementById('containerthree');
+        let position1 = animationT1.getBoundingClientRect().top;
+        let position2 = animationT2.getBoundingClientRect().top;
+
+        let tamWindow1 = window.innerHeight - 50;
+
+        console.log('position2: ', position2);
+
+        if(position1 < tamWindow1){
+          console.log('aqui');
+          animationT1.style.animation = "move1 1s ease-out";
+        }
+
+        let tamWindow2 = window.innerHeight - 50;
+
+        if(position2 < tamWindow2){
+          console.log('aqui');
+          animationT2.style.animation = "move2 1s ease-out";
+        }
       }
 
 }
